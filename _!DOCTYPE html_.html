@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego de Tablas de Multiplicar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f5f5dc;
+        }
+        .container {
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+        .question {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        input {
+            font-size: 18px;
+            padding: 5px;
+            text-align: center;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: #218838;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 22px;
+            font-weight: bold;
+        }
+        .animal {
+            font-size: 50px;
+            display: block;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>¡Practica las Tablas de Multiplicar!</h1>
+        <div id="animal-img" class="animal"></div>
+        <div class="question" id="question"></div>
+        <input type="number" id="answer" placeholder="Tu respuesta">
+        <br>
+        <button class="btn" onclick="checkAnswer()">Comprobar</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        const animals = [
+            "🐶", "🐱", "🐭", "🐹", "🐰", "🦊", "🐻", "🐼", "🐯", "🦁"
+        ];
+        
+        let num1, num2, correctAnswer;
+        function generateQuestion() {
+            num1 = Math.floor(Math.random() * 10) + 1;
+            num2 = Math.floor(Math.random() * 10) + 1;
+            correctAnswer = num1 * num2;
+            document.getElementById("question").innerText = `${num1} × ${num2} = ?`;
+            document.getElementById("animal-img").innerText = animals[Math.floor(Math.random() * animals.length)];
+            document.getElementById("result").innerText = "";
+            document.getElementById("answer").value = "";
+        }
+        
+        function checkAnswer() {
+            const userAnswer = parseInt(document.getElementById("answer").value);
+            const resultDiv = document.getElementById("result");
+            if (userAnswer === correctAnswer) {
+                resultDiv.innerText = "¡Correcto! 🎉";
+                resultDiv.style.color = "green";
+            } else {
+                resultDiv.innerText = "Inténtalo de nuevo 😢";
+                resultDiv.style.color = "red";
+            }
+            setTimeout(generateQuestion, 2000);
+        }
+        
+        generateQuestion();
+    </script>
+</body>
+</html>
